@@ -12,9 +12,9 @@ class plisio extends base
         $this->code             = 'plisio';
         $this->title            = MODULE_PAYMENT_PLISIO_TEXT_TITLE;
         $this->description      = MODULE_PAYMENT_PLISIO_TEXT_DESCRIPTION;
-        $this->api_key          = MODULE_PAYMENT_PLISIO_API_KEY;
-        $this->sort_order       = MODULE_PAYMENT_PLISIO_SORT_ORDER;
-        $this->enabled          = ((MODULE_PAYMENT_PLISIO_STATUS == 'True') ? true : false);
+        $this->api_key          = defined('MODULE_PAYMENT_PLISIO_API_KEY') ? MODULE_PAYMENT_PLISIO_API_KEY : null;         
+        $this->sort_order = defined('MODULE_PAYMENT_PLISIO_SORT_ORDER') ? MODULE_PAYMENT_PLISIO_SORT_ORDER : null;        
+        $this->enabled = (defined('MODULE_PAYMENT_PLISIO_STATUS') && MODULE_PAYMENT_PLISIO_STATUS == 'True');  
     }
 
     function javascript_validation()
