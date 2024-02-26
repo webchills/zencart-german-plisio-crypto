@@ -2,10 +2,14 @@
 
 class plisio extends base
 {
+    protected $_check;
     public $code;
     public $title;
     public $description;
     public $enabled;
+    public $order_status;
+    public $api_key;
+    public $sort_order;
 
     function __construct()
     {
@@ -15,6 +19,7 @@ class plisio extends base
         $this->api_key          = defined('MODULE_PAYMENT_PLISIO_API_KEY') ? MODULE_PAYMENT_PLISIO_API_KEY : null;         
         $this->sort_order = defined('MODULE_PAYMENT_PLISIO_SORT_ORDER') ? MODULE_PAYMENT_PLISIO_SORT_ORDER : null;        
         $this->enabled = (defined('MODULE_PAYMENT_PLISIO_STATUS') && MODULE_PAYMENT_PLISIO_STATUS == 'True');  
+      if (null === $this->sort_order) return false;
     }
 
     function javascript_validation()
