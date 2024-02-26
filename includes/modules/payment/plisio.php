@@ -1,15 +1,60 @@
 <?php
-
-class plisio extends base
-{
-    protected $_check;
-    public $code;
+/**
+ * package Plisio for Zen Cart German
+ * based on Plisio zencart-plugin (https://github.com/Plisio/zencart-plugin)
+ * Copyright (c) 2020 Plisio https://plisio.net 
+ * Zen Cart German Version - www.zen-cart-pro.at
+ * @license MIT License (MIT)
+ * @version $Id: plisio.php 2024-02-26 21:23714 webchills $
+*/
+class plisio extends base {    
+  /**
+   * name of this module
+   *
+   * @var string
+   */
+  public $code;
+  /**
+   * displayed module title
+   *
+   * @var string
+   */
     public $title;
+  /**
+   * displayed module description
+   *
+   * @var string
+   */
     public $description;
+  /**
+   * module status - set based on various config and zone criteria
+   *
+   * @var boolean
+   */
     public $enabled;
+  /**
+   * Installation 'check' flag
+   *
+   * @var boolean
+   */
+  protected $_check;
+  /**
+   * sort order of display
+   *
+   * @var int
+   */
+  public $sort_order = 0;
+  /**
+   * order status setting for completed orders
+   *
+   * @var int
+   */
     public $order_status;
-    public $api_key;
-    public $sort_order;
+  /**
+   * Variables used in processing transaction request/response values for internal use.
+   */
+   public $api_key;
+    
 
     function __construct()
     {
@@ -124,10 +169,10 @@ class plisio extends base
         $languages = zen_get_languages();
 
         foreach ($languages as $lang) {
-            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_paid . "', '" . $lang['id'] . "', 'Plisio [Paid]')");
-            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_pending . "', '" . $lang['id'] . "', 'Plisio [Pending]')");
-            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_expired . "', '" . $lang['id'] . "', 'Plisio [Expired]')");
-            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_cancelled . "', '" . $lang['id'] . "', 'Plisio [Cancelled]')");
+            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_paid . "', '" . $lang['id'] . "', 'Plisio [Bezahlt]')");
+            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_pending . "', '" . $lang['id'] . "', 'Plisio [Wartet]')");
+            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_expired . "', '" . $lang['id'] . "', 'Plisio [Abgelaufen]')");
+            $db->Execute("insert into " . TABLE_ORDERS_STATUS . " (orders_status_id, language_id, orders_status_name) values ('" . $status_id_cancelled . "', '" . $lang['id'] . "', 'Plisio [Abgebrochen]')");
         }
 
         $flags_query = $db->Execute("describe " . TABLE_ORDERS_STATUS . " public_flag");
