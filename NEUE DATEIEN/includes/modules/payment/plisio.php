@@ -5,7 +5,7 @@
  * Copyright (c) 2020 Plisio https://plisio.net 
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license MIT License (MIT)
- * @version $Id: plisio.php 2024-02-27 15:23714 webchills $
+ * @version $Id: plisio.php 2024-02-27 17:23:14 webchills $
 */
 class plisio extends base {    
   /**
@@ -177,10 +177,10 @@ class plisio extends base {
 
         $flags_query = $db->Execute("describe " . TABLE_ORDERS_STATUS . " public_flag");
         if ($flags_query->RecordCount() == 1) {
-            $db->Execute("update " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_paid . "'");
-            $db->Execute("update " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_pending . "'");
-            $db->Execute("update " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_expired . "'");
-            $db->Execute("update " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_cancelled . "'");
+            $db->Execute("UPDATE " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_paid . "'");
+            $db->Execute("UPDATE " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_pending . "'");
+            $db->Execute("UPDATE " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_expired . "'");
+            $db->Execute("UPDATE " . TABLE_ORDERS_STATUS . " set public_flag = 0 and downloads_flag = 0 where orders_status_id = '" . $status_id_cancelled . "'");
         }
 
         $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Plisio Module', 'MODULE_PAYMENT_PLISIO_STATUS', 'False', 'Enable Plisio Payment Gateway plugin?', '6', '0', 'zen_cfg_select_option(array(\'True\', \'False\'), ', now())");
@@ -190,22 +190,20 @@ class plisio extends base {
         $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function, date_added) values ('Set Plisio Order Status when order is cancelled', 'MODULE_PAYMENT_PLISIO_CANCELLED_STATUS_ID', '" . $status_id_cancelled .  "', 'Status in your store when order is cancelled.<br />(\'Plisio [Cancelled]\' recommended)', '6', '5', 'zen_cfg_pull_down_order_statuses(', 'zen_get_order_status_name', now())");
         $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function, date_added) values ('Set Plisio Order Status when order is expired', 'MODULE_PAYMENT_PLISIO_EXPIRED_STATUS_ID', '" . $status_id_expired .  "', 'Status in your store when order is expired.<br />(\'Plisio [Expired]\' recommended)', '6', '5', 'zen_cfg_pull_down_order_statuses(', 'zen_get_order_status_name', now())");
         $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, use_function, date_added) values ('Set Plisio Order Status when order is paid', 'MODULE_PAYMENT_PLISIO_PAID_STATUS_ID', '" . $status_id_paid .  "', 'Status in your store when order is paid.<br />(\'Plisio [Paid]\' recommended)', '6', '5', 'zen_cfg_pull_down_order_statuses(', 'zen_get_order_status_name', now())");
-        // www.zen-cart-pro.at german admin languages_id==43 START
         $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Zahlung via Plisio anbieten?', 'MODULE_PAYMENT_PLISIO_STATUS', '43', 'Wollen Sie Kryptozahlungen via Plisio aktivieren?', now())");
         $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Plisio API Key', 'MODULE_PAYMENT_PLISIO_API_KEY', '43', 'Tragen Sie hier Ihren Plisio API Key ein', now())");
-        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Sortierreihenfolge', 'MODULE_PAYMENT_PLISIO_SORT_ORDER', '43', 'Anzeigereigenfolge für dieses Modul. Der niedrigste Wert wird zuerst angezeigt..', now())");
-        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus für wartende Zahlungen', 'MODULE_PAYMENT_PLISIO_PENDING_STATUS_ID', '43', 'Empfohlen: Plisio [Wartet]', now())");
-        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus für abgebrochene Zahlungen', 'MODULE_PAYMENT_PLISIO_CANCELLED_STATUS_ID', '43', 'Empfohlen: Plisio [Abgebrochen]', now())");
-        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus für abgelaufene Zahlungen', 'MODULE_PAYMENT_PLISIO_EXPIRED_STATUS_ID', '43', 'Empfohlen: Plisio [Abgelaufen]', now())");
-        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus für erfolgreich abgeschlossene Zahlungen', 'MODULE_PAYMENT_PLISIO_PAID_STATUS_ID', '43', 'Empfohlen: Plisio [Bezahlt]', now())");
-      // www.zen-cart-pro.at german admin languages_id==43  END
-    }
+        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Sortierreihenfolge', 'MODULE_PAYMENT_PLISIO_SORT_ORDER', '43', 'Anzeigereigenfolge fÃ¼r dieses Modul. Der niedrigste Wert wird zuerst angezeigt..', now())");
+        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus fÃ¼r wartende Zahlungen', 'MODULE_PAYMENT_PLISIO_PENDING_STATUS_ID', '43', 'Empfohlen: Plisio [Wartet]', now())");
+        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus fÃ¼r abgebrochene Zahlungen', 'MODULE_PAYMENT_PLISIO_CANCELLED_STATUS_ID', '43', 'Empfohlen: Plisio [Abgebrochen]', now())");
+        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus fÃ¼r abgelaufene Zahlungen', 'MODULE_PAYMENT_PLISIO_EXPIRED_STATUS_ID', '43', 'Empfohlen: Plisio [Abgelaufen]', now())");
+        $db->Execute("INSERT INTO " . TABLE_CONFIGURATION_LANGUAGE   . " (configuration_title, configuration_key, configuration_language_id, configuration_description, date_added) values ('Bestellstatus fÃ¼r erfolgreich abgeschlossene Zahlungen', 'MODULE_PAYMENT_PLISIO_PAID_STATUS_ID', '43', 'Empfohlen: Plisio [Bezahlt]', now())");
+        }
 
     function remove () {
      global $db;
-       $db->Execute("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");
-      // www.zen-cart-pro.at german admin languages_id == delete all
-      $db->Execute("delete from " . TABLE_CONFIGURATION_LANGUAGE . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");   
+       $db->Execute("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_key in ('" . implode("', '", $this->keys()) . "')");     
+       $db->Execute("DELETE FROM " . TABLE_CONFIGURATION_LANGUAGE . " WHERE configuration_key in ('" . implode("', '", $this->keys()) . "')"); 
+       $db->Execute("DELETE FROM " . TABLE_ORDERS_STATUS . " WHERE orders_status_name LIKE '%Plisio%'"); 
     }
 
     function keys()
