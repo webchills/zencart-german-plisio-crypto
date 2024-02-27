@@ -5,7 +5,7 @@
  * Copyright (c) 2020 Plisio https://plisio.net 
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license MIT License (MIT)
- * @version $Id: plisio_callback.php 2024-02-26 21:23:14 webchills $
+ * @version $Id: plisio_callback.php 2024-02-27 19:11:14 webchills $
 */
 require('includes/application_top.php');
 
@@ -63,6 +63,15 @@ switch ($_REQUEST['status']) {
 
 if ($pl_order_status) {
     $db->Execute("update " . TABLE_ORDERS . " set orders_status = " . $pl_order_status . " where orders_id = " . intval($order_id));
+    $commentString = "Plisio Callback Update";
+    $sql_data_array = array(array('fieldName' => 'orders_id', 'value' => $order_id, 'type' => 'integer'),
+            array('fieldName' => 'orders_status_id', 'value' => $pl_order_status, 'type' => 'integer'),
+            array('fieldName' => 'date_added', 'value' => 'now()', 'type' => 'noquotestring'),
+            array('fieldName' => 'customer_notified', 'value' => 0, 'type' => 'integer'),
+            array('fieldName' => 'comments', 'value' => $commentString, 'type' => 'string'));
+
+        $db->perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
+    
 }
     echo 'OK';
 } else {
