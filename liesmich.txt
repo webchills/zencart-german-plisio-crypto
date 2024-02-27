@@ -1,6 +1,7 @@
-# zencart-german-plisio-crypto
 Plisio Zahlungsmodul für Zen Cart 1.5.7g/1.5.7h deutsch 
-* Plisio ist ein Payment Gateway für Bitcoin, Litecoin, Ethereum und 30 andere Kryptowährungen. Mit der Plisio API können Sie in Ihrem deutschen Zen Cart Onlineshop Kryptowährungen akzeptieren.
+
+Plisio ist ein Payment Gateway für Bitcoin, Litecoin, Ethereum und 30 andere Kryptowährungen. 
+Mit der Plisio API können Sie in Ihrem deutschen Zen Cart Onlineshop Kryptowährungen akzeptieren.
 
 ## Sinn und Zweck:
 * Mit diesem Modul wird Zahlung mit Kryptowährungen wie Bitcoin, Litecoin, Ethereum, Bitcoin Cash, Monero und anderen Altcoins via Plisio im Shop integriert.
@@ -15,3 +16,8 @@ Plisio Zahlungsmodul für Zen Cart 1.5.7g/1.5.7h deutsch
 * Dieses Modul basiert auf dem Zen Cart Plugin von Plisio (www.plisio.net)
 * Grundlage war das entsprechende Github Repository:
 * https://github.com/Plisio/zencart-plugin
+
+## Installation
+* Inhalt des Ordners NEUE DATEIEN in der vorgegebenen Struktur in Ihre Zen Cart Installation hochladen. Dadurch werden keine bestehenden Dateien überschrieben
+* Unter Module > Zahlungsarten das Plisio Modul installieren
+* Den API Key aus Ihrem Pliso Account in den Moduleinstellungen eintragen
