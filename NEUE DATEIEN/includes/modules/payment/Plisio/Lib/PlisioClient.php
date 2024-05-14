@@ -2,17 +2,17 @@
 /**
  * package Plisio for Zen Cart German
  * based on Plisio zencart-plugin (https://github.com/Plisio/zencart-plugin)
- * Copyright (c) 2020 Plisio https://plisio.net 
+ * Copyright (c) 2020-2024 Plisio https://plisio.net 
  * Zen Cart German Version - www.zen-cart-pro.at
  * @license MIT License (MIT)
- * @version $Id: PlisioClient.php 2024-02-26 21:23:14 webchills $
+ * @version $Id: PlisioClient.php 2024-05-14 20:23:14 webchills $
 */
 namespace PlisioClient;
 
 class PlisioClient
 {
     protected $secretKey = '';
-    public $apiEndPoint = 'https://plisio.net/api/v1';
+    public $apiEndPoint = 'https://api.plisio.net/api/v1';
 
 
     public function __construct($secretKey)
